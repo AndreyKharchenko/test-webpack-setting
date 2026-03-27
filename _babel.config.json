@@ -1,0 +1,15 @@
+// этот файл babel-loader находить умеет сам
+// можно выносить в отдельный файл, когда он нужен допустим еще каким-то библиоткам, нр jest
+
+// {
+//     "presets": [
+//         "@babel/preset-env",
+//         "@babel/preset-typescript",
+//         [
+//             "@babel/preset-react", 
+//             {
+//                 "runtime": "automatic"
+//             }
+//         ]
+//     ]
+// }
