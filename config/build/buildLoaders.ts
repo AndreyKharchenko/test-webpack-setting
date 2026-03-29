@@ -126,7 +126,16 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: {
-            loader: "swc-loader"
+            loader: "swc-loader",
+            options: {
+                jsc: {
+                    transform: {
+                        react: {
+                            runtime: "automatic"
+                        }
+                    }
+                }
+            }
         }
     };
 
