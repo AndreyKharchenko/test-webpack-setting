@@ -74,21 +74,21 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
     // };
 
     // TS-LOADER с transpileOnly для ускорения сборки и React-Refresh
-    const tsLoader = {
-        exclude: /node_modules/,
-        test: /\.tsx?$/,
-        use: [
-            {
-                loader: 'ts-loader',
-                options: {
-                    transpileOnly: true,
-                    getCustomTransformers: () => ({
-                        before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-                    }),
-                }
-            }
-        ],
-    };
+    // const tsLoader = {
+    //     exclude: /node_modules/,
+    //     test: /\.tsx?$/,
+    //     use: [
+    //         {
+    //             loader: 'ts-loader',
+    //             options: {
+    //                 transpileOnly: true,
+    //                 getCustomTransformers: () => ({
+    //                     before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+    //                 }),
+    //             }
+    //         }
+    //     ],
+    // };
 
     // Компиляция кода будет идти через babel
     // const babelLoader = {
@@ -111,13 +111,32 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
     //         }
     //     }
     // }
-    const babelLoader = buildBabelLoader(options);
+
+    // const babelLoader = buildBabelLoader(options);
+
+    // ESBUILD-LOADER: Транспиляция через (esbuild-loader)
+    // const esbuildLoader = {
+    //     test: /\.tsx?$/,
+    //     exclude: /node_modules/,
+    //     loader: 'esbuild-loader',
+    // };
+
+    // SWC-LOADER: Транспиляция через (swc-loader)
+    const swcLoader = {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+            loader: "swc-loader"
+        }
+    };
 
     return [
         assetLoader, 
         scssLoader, 
         // tsLoader, 
-        babelLoader,
+        // babelLoader,
+        // esbuildLoader,
+        swcLoader,
         svgrLoader
     ];
 }
